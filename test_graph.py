@@ -6,46 +6,50 @@ class test_graph:
         this.dot=nx.DiGraph();
         this.idx=2
         this.dot.add_node(0)
-        this.dot.node[0]['name']='src'
+        this.dot.node[0]['NAME']='src'
+        this.dot.node[0]['OP']='src'
         this.dot.add_node(1)
-        this.dot.node[1]['name']='sink'
+        this.dot.node[1]['NAME']='sink'
+        this.dot.node[1]['OP']='sink'
+
     def create_data_node(this,name,index,mean,var):
         idx=this.newNodeIdx();
         this.dot.add_node(idx);
-        this.dot.node[idx]['name']=name;
-        this.dot.node[idx]['idx']=index;
-        this.dot.node[idx]['var']=var;
-        this.dot.node[idx]['mean']=mean;
+        this.dot.node[idx]['OP']='data'
+        this.dot.node[idx]['NAME']=name;
+        this.dot.node[idx]['IDX']=index;
+        this.dot.node[idx]['V']=var;
+        this.dot.node[idx]['E']=mean;
         return idx;
 
     def create_add_node(this,name,mean,var):
         idx=this.newNodeIdx();
         this.dot.add_node(idx);
         this.dot.node[idx]['OP']='add'
-        this.dot.node[idx]['name']=name;
-        this.dot.node[idx]['var']=var;
-        this.dot.node[idx]['mean']=mean;
-        this.dot.node[idx]['idx']=-1
+        this.dot.node[idx]['NAME']=name;
+        this.dot.node[idx]['V']=var;
+        this.dot.node[idx]['E']=mean;
+        this.dot.node[idx]['IDX']=-1
         return idx;
 
     def create_cmul_node(this,name,mean,var):
         idx=this.newNodeIdx();
         this.dot.add_node(idx);
         this.dot.node[idx]['OP']='cmul'
-        this.dot.node[idx]['name']=name;
-        this.dot.node[idx]['var']=var;
-        this.dot.node[idx]['mean']=mean;
-        this.dot.node[idx]['idx']=-1
+        this.dot.node[idx]['NAME']=name;
+        this.dot.node[idx]['V']=var;
+        this.dot.node[idx]['E']=mean;
+        this.dot.node[idx]['IDX']=-1
         return idx;
 
     def create_const_node(this,name,index,value):
         idx=this.newNodeIdx();
         this.dot.add_node(idx);
-        this.dot.node[idx]['OP']='cmul'
-        this.dot.node[idx]['name']=name;
-        this.dot.node[idx]['var']=0;
-        this.dot.node[idx]['mean']=value;
-        this.dot.node[idx]['idx']=-1;
+        this.dot.node[idx]['OP']='const'
+        this.dot.node[idx]['NAME']=name;
+        this.dot.node[idx]['V']=0;
+        this.dot.node[idx]['E']=value;
+        this.dot.node[idx]['IDX']=-1;
         return idx
     def newNodeIdx(this):
         ret=this.idx
