@@ -3,18 +3,20 @@ import networkx as nx
 def adder_cost(graph,idx):
     plist=graph.predecessors(idx);
     if(len(plist)==2):
-        args='({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}{})'\
+        args='({}, {}, {}, {}, {}, {}{},{}, {}, {}, {}, {}, {}{},{}{})'\
         .format(
         graph.node[plist[0]]['E']  ,
         graph.node[plist[0]]['V']  ,
         graph.node[plist[0]]['NE'] ,
         graph.node[plist[0]]['NV'] ,
         graph.node[plist[0]]['COV'],
+        graph.node[plist[0]]['NAME'],'_FBITS',
         graph.node[plist[1]]['E']  ,
         graph.node[plist[1]]['V']  ,
         graph.node[plist[1]]['NE'] ,
         graph.node[plist[1]]['NV'] ,
         graph.node[plist[1]]['COV'],
+        graph.node[plist[1]]['NAME'],'_FBITS',
         graph.node[idx]['NAME'],'_FBITS'
         )
         graph.node[idx]['NE']='E_ADD({})'.format(args)
@@ -25,20 +27,22 @@ def adder_cost(graph,idx):
 
 def mult_cost(graph,idx):
     plist=graph.predecessors(idx);
-    print plist, graph.node['6']
+    #print plist, graph.node['6']
     if(len(plist)==2):
-        args='({}, {}, {}, {}, {}, {}, {}, {}, {}, {},  {}{}, {}{})'\
+        args='({}, {}, {}, {}, {},{}{}, {}, {}, {}, {}, {},{}{},{}{}, {}{})'\
         .format(
         graph.node[plist[0]]['E']  ,
         graph.node[plist[0]]['V']  ,
         graph.node[plist[0]]['NE'] ,
         graph.node[plist[0]]['NV'] ,
         graph.node[plist[0]]['COV'],
+        graph.node[plist[0]]['NAME'],'_FBITS',
         graph.node[plist[1]]['E']  ,
         graph.node[plist[1]]['V']  ,
         graph.node[plist[1]]['NE'] ,
         graph.node[plist[1]]['NV'] ,
         graph.node[plist[1]]['COV'],
+        graph.node[plist[1]]['NAME'],'_FBITS',
         graph.node[idx]['NAME'],'_L_FBITS',
         graph.node[idx]['NAME'],'_R_FBITS'
         )
@@ -102,7 +106,7 @@ def bfs(graph,func):
         if(graph.node[head]['color']==False):
             graph.node[head]['color']=True;
             print head
-            cost_func(graph,head)
+            func(graph,head)
         else:
             continue
         for idx in graph.successors(head):
@@ -112,6 +116,6 @@ def bfs(graph,func):
 
 if __name__=="__main__":
     g=nx.read_dot('test_graph.dot')
-    bfs(g,print_node)
+    bfs(g,cost_func)
 
     print g.node['13']

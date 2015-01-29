@@ -65,12 +65,12 @@ class test_graph:
         coeff=[this.create_const_node('coeff',1,1.1),
             this.create_const_node('coeff',1,2.1),
             this.create_const_node('coeff',2,3.3)]
-        mul=[this.create_cmul_node('mul0',0,1.1*1.1),
-            this.create_cmul_node('mul1',0,2.1*2.1),
-            this.create_cmul_node('mul2',0,3.3*3.3)]
-        add=[this.create_add_node('add0',0,1.1*1.1+2.1*2.2),
-            this.create_add_node('add1',0,1.1*1.1+2.1*2.1+3.3*3.3)]
-        out=this.create_data_node('s',0,0,1.1*1.1+2.1*2.1+3.3*3.3)
+        mul=[this.create_cmul_node('mul0',0,1.1*1.1*4),
+            this.create_cmul_node('mul1',0,2.1*2.1*4),
+            this.create_cmul_node('mul2',0,3.3*3.3*4)]
+        add=[this.create_add_node('add0',0,1.1*1.1*4+2.1*2.2*4),
+            this.create_add_node('add1',0,1.1*1.1*4+2.1*2.1*4+3.3*3.3*4)]
+        out=this.create_data_node('s',0,0,1.1*1.1*4+2.1*2.1*4+3.3*3.3*4)
         print a
         print coeff
         print mul
